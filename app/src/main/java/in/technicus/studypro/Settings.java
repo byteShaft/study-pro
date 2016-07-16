@@ -40,7 +40,7 @@ public class Settings extends AppCompatActivity implements CompoundButton.OnChec
     }
 
     public void enableBroadcastReceiver() {
-        ComponentName receiver = new ComponentName(this, AlarmReciver.class);
+        ComponentName receiver = new ComponentName(this, AlarmReceiver.class);
         PackageManager pm = this.getPackageManager();
 
         pm.setComponentEnabledSetting(receiver,
@@ -50,7 +50,7 @@ public class Settings extends AppCompatActivity implements CompoundButton.OnChec
     }
 
     public void disableBroadcastReceiver(){
-        ComponentName receiver = new ComponentName(this, AlarmReciver.class);
+        ComponentName receiver = new ComponentName(this, AlarmReceiver.class);
         PackageManager pm = this.getPackageManager();
         pm.setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,

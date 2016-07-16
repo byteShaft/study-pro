@@ -110,7 +110,7 @@ public class AddAgenda extends AppCompatActivity implements  View.OnClickListene
 
                     AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
 
-                    Intent _myIntent = new Intent(getApplicationContext(), AlarmReciver.class);
+                    Intent _myIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
                     _myIntent.putExtra("MyMessage", "You have setted a alarm for "+ title +" for time:"+alarmHours+":"+alarmMinutes);
 
                     PendingIntent _myPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 123, _myIntent, PendingIntent.FLAG_UPDATE_CURRENT |  Intent.FILL_IN_DATA);
