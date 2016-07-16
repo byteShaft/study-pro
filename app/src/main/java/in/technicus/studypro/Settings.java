@@ -39,9 +39,7 @@ public class Settings extends AppCompatActivity implements CompoundButton.OnChec
         Helpers.saveServiceStateEnabled(isChecked);
     }
 
-    public void enableBroadcastReceiver()
-    {
-
+    public void enableBroadcastReceiver() {
         ComponentName receiver = new ComponentName(this, AlarmReciver.class);
         PackageManager pm = this.getPackageManager();
 
@@ -50,10 +48,7 @@ public class Settings extends AppCompatActivity implements CompoundButton.OnChec
                 PackageManager.DONT_KILL_APP);
         Toast.makeText(this, "Enabled ", Toast.LENGTH_SHORT).show();
     }
-    /**
-     * This method disables the Broadcast receiver registered in the AndroidManifest file.
-     * @param
-     */
+
     public void disableBroadcastReceiver(){
         ComponentName receiver = new ComponentName(this, AlarmReciver.class);
         PackageManager pm = this.getPackageManager();
