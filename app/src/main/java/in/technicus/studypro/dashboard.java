@@ -1,14 +1,15 @@
 package in.technicus.studypro;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 public class dashboard extends AppCompatActivity {
-Button myagenda,mycourse,mysetting;
+
+
+    Button myagenda,mycourse,mysetting;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,7 @@ Button myagenda,mycourse,mysetting;
         mysetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getBaseContext() , Settings.class));
             }
         });
     }
