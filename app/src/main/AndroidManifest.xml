@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
+        android:name=".AppGlobals"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,16 +14,15 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".dashboard"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".ViewAgenda"
             android:label="My Agendas"
-            android:parentActivityName=".dashboard"></activity>
+            android:parentActivityName=".dashboard" />
         <activity
             android:name=".AddAgenda"
             android:label="Add Agenda"
-            android:parentActivityName=".ViewAgenda"></activity>
+            android:parentActivityName=".ViewAgenda" />
 
         <receiver android:name=".AlarmReciver">
             <intent-filter>
@@ -33,7 +33,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".splash_screen"
+        <activity
+            android:name=".splash_screen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,6 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>
