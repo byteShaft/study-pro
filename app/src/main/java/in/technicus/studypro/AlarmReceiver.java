@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.widget.Toast;
 
-public class AlarmReciver extends BroadcastReceiver {
+public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Helpers.showNotification();

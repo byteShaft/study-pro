@@ -17,11 +17,11 @@ public class DbConnection  extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
 
     private static final String DB_NAME = "studyPro";
-    private static final String Table_NAME = "agenda";
+    private static final String TABLE_NAME = "agenda";
 
     private static final String CREATE_TABLE_AGENDA = "CREATE TABLE "
-            + Table_NAME + "("
-            + "agendaID" + " INT PRIMARY KEY ,"
+            + TABLE_NAME + "("
+            + "agendaID" + " INTEGER PRIMARY KEY ,"
             + "agendaTitle" + " TEXT,"
             + "agendaImportance" + " TEXT,"
             + "agendaStatus" + " TEXT)";
@@ -37,7 +37,7 @@ public class DbConnection  extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + Table_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
@@ -46,12 +46,12 @@ public class DbConnection  extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("agendaTitle", listPojo.getAgendaTitle());
         values.put("agendaImportance", listPojo.getAgendaImportance());
-        db.insert(Table_NAME, null, values);
+        db.insert(TABLE_NAME, null, values);
         db.close();
     }
     public List<ListPojo> getAllagenda(){
         List<ListPojo> listPojos = new ArrayList<ListPojo>();
-        String selectQuery = "SELECT * FROM "+ Table_NAME;
+        String selectQuery = "SELECT * FROM "+ TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -59,6 +59,8 @@ public class DbConnection  extends SQLiteOpenHelper {
             do{
                 ListPojo lp = new ListPojo();
 //                Log.e("getAllagenda: ", cursor.getString(1)+cursor.getString(2));
+                Log.e("TAG", cursor.getString(1) + " " + cursor.getString(2) + " id " + cursor.getInt(0));
+                lp.setAgendaId("" + cursor.getInt(0));
                 lp.setAgendaTitle("Agenda Title: "+cursor.getString(1));
                 lp.setAgendaImportance("Priority: "+cursor.getString(2));
                 listPojos.add(lp);
@@ -69,11 +71,16 @@ public class DbConnection  extends SQLiteOpenHelper {
     public int getCountInDB()
     {
         int cnt=0;
-        String countQ="SELECT * FROM "+Table_NAME;
+        String countQ="SELECT * FROM "+ TABLE_NAME;
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cur=db.rawQuery(countQ,null);
         cnt=cur.getCount();
         cur.close();
         return cnt;
+    }
+
+    public boolean deleteAgenda(Integer id) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(TABLE_NAME, "agendaID" + "=" + id, null) > 0;
     }
 }
