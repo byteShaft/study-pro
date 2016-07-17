@@ -40,7 +40,7 @@ public class AddAgenda extends AppCompatActivity implements  View.OnClickListene
         setContentView(R.layout.activity_add_agenda);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        dbcon=new DbConnection(this);
+        dbcon = new DbConnection(this);
 
         btnDatePicker = (Button) findViewById(R.id.btn_date);
         btnTimePicker = (Button) findViewById(R.id.btn_time);
@@ -94,6 +94,22 @@ public class AddAgenda extends AppCompatActivity implements  View.OnClickListene
                 if(aRem=="yes")
                 {
                     //insert into db
+                    AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+
+                    Calendar notificationAlarm = Calendar.getInstance();
+                    notificationAlarm.set(Calendar.MONTH,alarmMonth);
+                    notificationAlarm.set(Calendar.YEAR, alarmYear);
+                    notificationAlarm.set(Calendar.DAY_OF_MONTH, alarmDay);
+                    notificationAlarm.set(Calendar.HOUR_OF_DAY, alarmHours);
+                    Log.i("TAG", alarmMinutes + "  minutes" + alarmMinutes);
+                    notificationAlarm.set(Calendar.MINUTE, alarmMinutes);
+                    notificationAlarm.set(Calendar.SECOND,10);
+
+                    Intent notification = new Intent("com.byteshaft.setnotification");
+                    notification.putExtra("MyMessage", "You have setted a alarm for "+ title +" for time:"+alarmHours+":"+alarmMinutes);
+
+                    PendingIntent notificationPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 12, notification, PendingIntent.FLAG_UPDATE_CURRENT |  Intent.FILL_IN_DATA);
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, (notificationAlarm.getTimeInMillis()- 300000), notificationPendingIntent);
 
                     Calendar myAlarmDate = Calendar.getInstance();
 //                    myAlarmDate.setTimeInMillis(System.currentTimeMillis());
@@ -108,9 +124,7 @@ public class AddAgenda extends AppCompatActivity implements  View.OnClickListene
                     Long nextAlarm= myAlarmDate.getTimeInMillis();
 
 
-                    AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-
-                    Intent _myIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                    Intent _myIntent = new Intent("com.byteshaft.setagenda");
                     _myIntent.putExtra("MyMessage", "You have setted a alarm for "+ title +" for time:"+alarmHours+":"+alarmMinutes);
 
                     PendingIntent _myPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 123, _myIntent, PendingIntent.FLAG_UPDATE_CURRENT |  Intent.FILL_IN_DATA);
