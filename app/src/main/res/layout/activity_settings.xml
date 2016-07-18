@@ -11,7 +11,7 @@
 
     <Switch
         android:id="@+id/aSwitch"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
@@ -19,5 +19,25 @@
         android:paddingLeft="9dp"
         android:paddingRight="9dp"
         android:textStyle="bold"/>
+
+
+        <Button
+            android:theme="@style/AppTheme.Button"
+            android:id="@+id/button_about"
+            android:text="About Us"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/aSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:theme="@style/AppTheme.Button"
+            android:id="@+id/button_feedback"
+            android:text="Feedback"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/button_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 </RelativeLayout>
